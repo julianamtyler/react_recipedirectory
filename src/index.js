@@ -9,24 +9,14 @@ const Header = () => (
 );
 
 
-
-const DetailView = (props) => (
-  <div className="detail">
-    <h3 className="recipeName">{props.name}</h3>
-    <p>{props.ingredients}</p>
-    <p>{props.instructions}</p>
-  </div>
-);
-
-
 const DirectoryView = (props) => (
-  <div className="directview">
+  <div className="directview box">
     <SearchForm  recipes = {props.recipes} selectRecipes = {props.selectRecipes} searchVal={props.searchVal} handleChange={props.handleChange}/>
-    {props.selectedRecipes.map(recipe => (
-      <RecipeCard name={recipe.name} key={recipe.id} />
-    ))}
+    {props.selectedRecipes.map(recipe => 
+    <RecipeCard onClick={props.toggleClass} name={recipe.name} id={recipe.id} key={recipe.id} detailRecipe={props.detailRecipe} />)}
   </div>
 );
+
 
 const SearchForm = (props) => (
   <form>
@@ -35,13 +25,36 @@ const SearchForm = (props) => (
   </form>
 );
 
+
 const RecipeCard = (props) => (
-  <div className="card">
-    <p className="recipeCard">{props.name}</p>
+  <div className="card" onClick={() => props.detailRecipe(props.id)}>
+      <p className="recipeCard">{props.name}</p>
   </div>
 );
 
+const DetailView = (props) => (
+  <div classNam='box'>
+  <div>
+      {props.detailedRecipe.name}
+  </div>
+  <div>
+      <h1 className="hide">INGREDIENTS</h1>
+      <ul>
+          {props.detailedRecipe.ingredients ? props.detailedRecipe.ingredients.map(ingredient => <li >{ingredient}</li>) : null}
+      </ul>
+  </div>
+  <div>
+      <h1 className="hide">INSTRUCTIONS</h1>
+      <ul>
+          {props.detailedRecipe.instructions ? props.detailedRecipe.instructions.map(instruction => <li >{instruction}</li>) : null}
+      </ul>
+  </div>
+</div>
+);
+
+
 class App extends React.Component {
+
   state = {
     recipes: [
       {
@@ -146,7 +159,7 @@ class App extends React.Component {
       },
       {
         id: 8,
-        name: "Italian chicken",
+        name: "Italian Chicken",
         ingredients: [
             "2 cups green beans",
             "2-3 medium russet potatoes",
@@ -169,13 +182,15 @@ class App extends React.Component {
       }
     ],
     searchVal: '',
-    selectedRecipes: []
+    selectedRecipes: [],
+    detailedRecipe: []
     };    
-
+    toggleClass =() => {
+      this.removeClass('hide')
+    }
     handleChange = (event) => {
       event.preventDefault();
         this.setState({ searchVal: event.target.value });
-        console.log(this.state.searchVal)
     };
 
     selectRecipes = (event)=> {
@@ -183,22 +198,31 @@ class App extends React.Component {
       const filteredRecipes = this.state.recipes.filter(filtered =>
       filtered.name.includes(this.state.searchVal)
     );
-    console.log( filteredRecipes)
+
     this.setState({ selectedRecipes: filteredRecipes });
     };
+
+    detailRecipe = (id) => {
+      this.setState({ detailedRecipe: [] });
+      this.setState({ detailedRecipe: this.state.recipes.find(recipes => recipes.id === id) })
+  }
 
   render() {
     return (
       <div>
         <Header />
+        <div className="container">
         <DirectoryView
           recepes= {this.state.recipes}
           searchVal={this.state.searchVal}
           handleChange={this.handleChange}
           selectedRecipes = {this.state.selectedRecipes}
           selectRecipes = {this.selectRecipes}
+          detailRecipe={this.detailRecipe}
+          toggleClass ={this.toggleClass}
         />
-        <DetailView  />
+        <DetailView detailedRecipe={this.state.detailedRecipe}/>
+        </div>
       </div>
     );
   };
