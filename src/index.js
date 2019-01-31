@@ -196,9 +196,8 @@ class App extends React.Component {
     selectRecipes = (event)=> {
       event.preventDefault();
       const filteredRecipes = this.state.recipes.filter(filtered =>
-      filtered.name.includes(this.state.searchVal)
+      filtered.name.toLowerCase().includes(this.state.searchVal.toLowerCase())
     );
-
     this.setState({ selectedRecipes: filteredRecipes });
     };
 
