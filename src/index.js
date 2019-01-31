@@ -10,7 +10,7 @@ const Header = () => (
 
 
 const DirectoryView = (props) => (
-  <div className="directview box">
+  <div className='box'>
     <SearchForm  recipes = {props.recipes} selectRecipes = {props.selectRecipes} searchVal={props.searchVal} handleChange={props.handleChange}/>
     {props.selectedRecipes.map(recipe => 
     <RecipeCard onClick={props.toggleClass} name={recipe.name} id={recipe.id} key={recipe.id} detailRecipe={props.detailRecipe} />)}

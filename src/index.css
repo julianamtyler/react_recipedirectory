@@ -23,6 +23,7 @@ code {
   flex-wrap: wrap;
 }
 .box {
+  padding: 10px;
   width: 650px;
   height: 300px;
   display: block;
@@ -64,21 +65,4 @@ code {
   margin-left: 30px;
   width: 300px;
   height: 30px;
-}
-.directview {
-width: 50%;
-float: left;
-}
-.detail {
-  width: 50%;
-  float: left;
-}
-.ingred {
-  padding: 10px;
-  color: brown;
-}
-.directions {
-
-  padding: 10px;
-  color: brown;
 }
