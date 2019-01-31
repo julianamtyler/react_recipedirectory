@@ -33,7 +33,7 @@ const RecipeCard = (props) => (
 );
 
 const DetailView = (props) => (
-  <div classNam='box'>
+  <div className='box'>
   <div>
       {props.detailedRecipe.name}
   </div>
