@@ -4,16 +4,16 @@ import "./index.css";
 
 const Header = () => (
   <div className="header">
-    <h2><i className="fas fa-utensils"></i> RecipeApp</h2>
+    <h2><i className="fas fa-utensils"></i> Find your next Recipe App</h2>
   </div>
 );
 
 
 const DirectoryView = (props) => (
-  <div className='box'>
-    <SearchForm  recipes = {props.recipes} selectRecipes = {props.selectRecipes} searchVal={props.searchVal} handleChange={props.handleChange}/>
-    {props.selectedRecipes.map(recipe => 
-    <RecipeCard onClick={props.toggleClass} name={recipe.name} id={recipe.id} key={recipe.id} detailRecipe={props.detailRecipe} />)}
+  <div className="box">
+    <SearchForm recipes={props.recipes} selectRecipes={props.selectRecipes} searchVal={props.searchVal} handleChange={props.handleChange} />
+    {props.selectedRecipes.map(recipe =>
+      <RecipeCard onClick={props.toggleClass} name={recipe.name} id={recipe.id} key={recipe.id} detailRecipe={props.detailRecipe} />)}
   </div>
 );
 
@@ -28,33 +28,32 @@ const SearchForm = (props) => (
 
 const RecipeCard = (props) => (
   <div className="card" onClick={() => props.detailRecipe(props.id)}>
-      <p className="recipeCard">{props.name}</p>
+    <p className="recipeCard">{props.name}</p>
   </div>
 );
 
 const DetailView = (props) => (
-  <div className='box'>
-  <div>
+  <div className="detail">
+    <div className="title">
       {props.detailedRecipe.name}
-  </div>
-  <div>
-      <h1 className="hide">INGREDIENTS</h1>
+    </div>
+    <div  className="ingredients">
+      {/* <div className="ingredients">Ingredients:</div> */}
       <ul>
-          {props.detailedRecipe.ingredients ? props.detailedRecipe.ingredients.map(ingredient => <li >{ingredient}</li>) : null}
+        {props.detailedRecipe.ingredients ? props.detailedRecipe.ingredients.map(ingredient => <li >{ingredient}</li>) : null}
       </ul>
-  </div>
-  <div>
-      <h1 className="hide">INSTRUCTIONS</h1>
+    </div>
+    <div  className="directions">
+      {/* <div className="directions">Directions:</div> */}
       <ul>
-          {props.detailedRecipe.instructions ? props.detailedRecipe.instructions.map(instruction => <li >{instruction}</li>) : null}
+        {props.detailedRecipe.instructions ? props.detailedRecipe.instructions.map(instruction => <li >{instruction}</li>) : null}
       </ul>
+    </div>
   </div>
-</div>
 );
 
 
 class App extends React.Component {
-
   state = {
     recipes: [
       {
@@ -154,56 +153,113 @@ class App extends React.Component {
           "Add Mayo and Sour Cream",
           "mix all the ingredients together",
           "Enjoy"
-    
+
         ]
       },
       {
         id: 8,
         name: "Italian Chicken",
         ingredients: [
-            "2 cups green beans",
-            "2-3 medium russet potatoes",
-            "2-3 large chicken breasts thawed or fresh",
-            "1 pkg Italian dressing mix",
-            "8 tbsp butter",
-            "Salt and pepper"
+          "2 cups green beans",
+          "2-3 medium russet potatoes",
+          "2-3 large chicken breasts thawed or fresh",
+          "1 pkg Italian dressing mix",
+          "8 tbsp butter",
+          "Salt and pepper"
         ],
         instructions: [
-            "Preheat the oven to 350 degrees",
-            "Wash the green beans and potatoes",
-            "Peel the potatoes and cut into small cubes",
-            "Slice green beans into bite size pieces",
-            "Line one side of a 9x13 baking dish with green beans and line the other with the chunks of potato",
-            "Place the chicken breast between the green beans and potatoes. (I sliced my chicken in half to make thinner pieces of meat)",
-            "Cut the butter into 1 tbsp squares and place evenly over the green beans, chicken, and potatoes",
-            "Sprinkle entire dish with Italian seasoning, salt, and pepper",
-            "Cover with foil and bake for one hour"
+          "Preheat the oven to 350 degrees",
+          "Wash the green beans and potatoes",
+          "Peel the potatoes and cut into small cubes",
+          "Slice green beans into bite size pieces",
+          "Line one side of a 9x13 baking dish with green beans and line the other with the chunks of potato",
+          "Place the chicken breast between the green beans and potatoes. (I sliced my chicken in half to make thinner pieces of meat)",
+          "Cut the butter into 1 tbsp squares and place evenly over the green beans, chicken, and potatoes",
+          "Sprinkle entire dish with Italian seasoning, salt, and pepper",
+          "Cover with foil and bake for one hour"
+        ]
+      },
+      {
+        id: 9,
+        name: "Pork Chops with Fresh Tomato, Onion, Garlic, and Feta",
+        ingredients: [
+          "2 tablespoons olive oil, divided",
+          "1/2 pint red grape tomatoes, halved",
+          "1/2 pint yellow grape tomatoes, halved",
+          "1 large onion, halved and thinly sliced",
+          "4 pork loin chops, 1 inch thick",
+          "3 cloves garlic, diced",
+          "salt to taste",
+          "black pepper to taste",
+          "2 1/2 teaspoons balsamic vinegar",
+          "4 ounces feta cheese, crumbled",
+          "garlic powder to taste"
+
+        ],
+        instructions: [
+          "Heat 1 tablespoon oil in a skillet over medium heat. Stir in the onion and cook until golden brown. Set aside.",
+          "Heat 1/2 tablespoon oil in the skillet.", 
+          "Season pork chops with salt, pepper, and garlic powder, and place in the skillet.", 
+          "Cook to desired doneness. Set aside and keep warm.",
+          "Heat remaining oil in the skillet.", 
+          "Return onions to skillet, and stir in tomatoes, garlic, and basil. Cook and stir about 3 minutes, until tomatoes are tender. Mix in balsamic vinegar, and season with salt and pepper.",
+          "Top chops with the onion and tomato mixture, and sprinkle with feta cheese to serve."
+        ]
+      },
+      {
+        id: 10,
+        name: "One Pot Thai-Style Rice Noodles",
+        ingredients: [
+          "2 tablespoons cornstarch",
+          "1 1/2 tablespoons water",
+          "6 cups chicken broth",
+          "2 1/2 tablespoons soy sauce",
+          "1 tablespoon fish sauce",
+          "1 tablespoon rice vinegar",
+          "1 tablespoon chile-garlic sauce (such as Sriracha®), or more to taste",
+          "2 teaspoons vegetable oil",
+          "2 teaspoons minced fresh ginger root",
+          "2 cloves garlic, minced",
+          "1 teaspoon ground coriander",
+          "1 (16 ounce) package thick rice noodles",
+          "1 cup sliced zucchini",
+          "1 cup sliced red bell pepper",
+          "2 cooked chicken breasts, cut into 1-inch cubes"
+
+        ],
+        instructions: [
+          "Stir cornstarch and water together in a small bowl until smooth.",
+          "Pour chicken broth into a large pot and stir cornstarch mixture, soy sauce, fish sauce, rice vinegar, chile-garlic sauce, vegetable oil, ginger, garlic, and coriander into broth.", 
+          "Cover and bring to a boil.", 
+          "Place rice noodles in the boiling sauce, reduce heat to medium, and simmer until noodles are tender, 5 to 10 minutes.", 
+          "Stir zucchini, red bell pepper, and chicken into sauce.", 
+          "Bring back to a boil, cover, and simmer until vegetables are just become tender, about 5 more minutes.",
+        "Remove from heat and let stand, covered, for 5 minutes to thicken.",
+         "Serve garnished with crushed peanuts and cilantro."
         ]
       }
     ],
     searchVal: '',
     selectedRecipes: [],
     detailedRecipe: []
-    };    
-    toggleClass =() => {
-      this.removeClass('hide')
-    }
-    handleChange = (event) => {
-      event.preventDefault();
-        this.setState({ searchVal: event.target.value });
-    };
+  };
 
-    selectRecipes = (event)=> {
-      event.preventDefault();
-      const filteredRecipes = this.state.recipes.filter(filtered =>
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ searchVal: event.target.value });
+  };
+
+  selectRecipes = (event) => {
+    event.preventDefault();
+    const filteredRecipes = this.state.recipes.filter(filtered =>
       filtered.name.toLowerCase().includes(this.state.searchVal.toLowerCase())
     );
     this.setState({ selectedRecipes: filteredRecipes });
-    };
+  };
 
-    detailRecipe = (id) => {
-      this.setState({ detailedRecipe: [] });
-      this.setState({ detailedRecipe: this.state.recipes.find(recipes => recipes.id === id) })
+  detailRecipe = (id) => {
+    this.setState({ detailedRecipe: [] });
+    this.setState({ detailedRecipe: this.state.recipes.find(recipes => recipes.id === id) })
   }
 
   render() {
@@ -211,16 +267,16 @@ class App extends React.Component {
       <div>
         <Header />
         <div className="container">
-        <DirectoryView
-          recepes= {this.state.recipes}
-          searchVal={this.state.searchVal}
-          handleChange={this.handleChange}
-          selectedRecipes = {this.state.selectedRecipes}
-          selectRecipes = {this.selectRecipes}
-          detailRecipe={this.detailRecipe}
-          toggleClass ={this.toggleClass}
-        />
-        <DetailView detailedRecipe={this.state.detailedRecipe}/>
+          <DirectoryView
+            recepes={this.state.recipes}
+            searchVal={this.state.searchVal}
+            handleChange={this.handleChange}
+            selectedRecipes={this.state.selectedRecipes}
+            selectRecipes={this.selectRecipes}
+            detailRecipe={this.detailRecipe}
+            toggleClass={this.toggleClass}
+          />
+          <DetailView detailedRecipe={this.state.detailedRecipe}/>
         </div>
       </div>
     );
