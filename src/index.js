@@ -4,7 +4,7 @@ import "./index.css";
 
 const Header = () => (
   <div className="header">
-    <h2><i className="fas fa-utensils"></i> Find your next Recipe App</h2>
+    <h2><i className="fas fa-utensils"></i> Find your Next Recipe</h2>
   </div>
 );
 
@@ -38,13 +38,11 @@ const DetailView = (props) => (
       {props.detailedRecipe.name}
     </div>
     <div  className="ingredients">
-      {/* <div className="ingredients">Ingredients:</div> */}
       <ul>
         {props.detailedRecipe.ingredients ? props.detailedRecipe.ingredients.map(ingredient => <li >{ingredient}</li>) : null}
       </ul>
     </div>
     <div  className="directions">
-      {/* <div className="directions">Directions:</div> */}
       <ul>
         {props.detailedRecipe.instructions ? props.detailedRecipe.instructions.map(instruction => <li >{instruction}</li>) : null}
       </ul>
